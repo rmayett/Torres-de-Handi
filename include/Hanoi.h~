@@ -21,5 +21,4 @@ public:
 	Hanoi(int Discos);
 	void Resolver();
 	void LlenarTorre();
-	void MostrarTorres();
 };

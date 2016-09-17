@@ -8,7 +8,7 @@ de movimientos
 Hanoi::Hanoi(int Discos)
 {
 	this->Discos= Discos;
-	this->NumMovimientos=pow(2,this->Discos);
+	this->NumMovimientos=pow(2,this->Discos)-1;
 }
 
 /**
@@ -19,21 +19,13 @@ de Hanoi con N discos
 */
 void Hanoi::Resolver()
 {
-
 	if (this->Discos%2 == 0)
 	{
 		for (int i = 1; i < this->NumMovimientos; ++i)
 		{
-			
-			int O=(this->origen.empty())?0:this->origen.top();
-			int A=(this->auxiliar.empty())?0:this->auxiliar.top();
-			int D=(this->destino.empty())?0:this->destino.top();
-
-
-
 			if (i%3==1)
 			{//movimento entre origen y auxiliar
-				if (O>A)
+				if (this->origen.top()>this->auxiliar.top())
 				{
 					this->origen.push(this->auxiliar.top());
 					this->auxiliar.pop();
@@ -45,7 +37,7 @@ void Hanoi::Resolver()
 			}
 			if (i%3==2)
 			{//movimento entre origen y destino
-				if ( O>D)
+				if (this->origen.top()>this->destino.top())
 				{
 					this->origen.push(this->destino.top());
 					this->destino.pop();
@@ -57,7 +49,7 @@ void Hanoi::Resolver()
 			}
 			if (i%3==0)
 			{//movimento entre destino y auxiliar
-				if ( A>D)
+				if (this->auxiliar.top()>this->destino.top())
 				{
 					this->auxiliar.push(this->destino.top());
 					this->destino.pop();
@@ -67,24 +59,15 @@ void Hanoi::Resolver()
 					this->auxiliar.pop();
 				}
 			}
-			this->MostrarTorres();
 		}
 	}else
 	{
 		for (int i = 1; i < this->NumMovimientos; ++i)
 		{
-
-			int O=(this->origen.empty())?INFINITY:this->origen.top();
-			int A=(this->auxiliar.empty())?INFINITY:this->auxiliar.top();
-			int D=(this->destino.empty())?INFINITY:this->destino.top();
-
-			//std::cout<<O<<" "<<A<<" "<<D<<std::endl;
 			if (i%3==1)
 			{//movimento entre origen y destino
-				
-				if ( O>D)
+				if (this->origen.top()>this->destino.top())
 				{
-
 					this->origen.push(this->destino.top());
 					this->destino.pop();
 				}else
@@ -93,12 +76,11 @@ void Hanoi::Resolver()
 					this->origen.pop();
 				}	
 
-
 			}
 			if (i%3==2)
 			{//movimento entre origen y auxiliar
 				
-				if (O>A)
+				if (this->origen.top()>this->auxiliar.top())
 				{
 					this->origen.push(this->auxiliar.top());
 					this->auxiliar.pop();
@@ -110,7 +92,7 @@ void Hanoi::Resolver()
 			}
 			if (i%3==0)
 			{//movimento entre destino y auxiliar
-				if ( A>D)
+				if (this->auxiliar.top()>this->destino.top())
 				{
 					this->auxiliar.push(this->destino.top());
 					this->destino.pop();
@@ -120,7 +102,6 @@ void Hanoi::Resolver()
 					this->auxiliar.pop();
 				}
 			}
-		this->MostrarTorres();
 		}
 	}
 
