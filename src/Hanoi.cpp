@@ -2,8 +2,8 @@
 /**
 Constructor calcula el numero 
 de movimientos
-@params Discos ________
-@result void
+resive el numero de discos 
+no regresa nada
 */
 Hanoi::Hanoi(int Discos)
 {
@@ -13,8 +13,7 @@ Hanoi::Hanoi(int Discos)
 /*
 Resuelve el juego de las Torres 
 de Hanoi con N discos
-@params void
-@result void
+no recibe ni regresa nada
 */
 void Hanoi::Resolver()
 {
@@ -34,9 +33,9 @@ void Hanoi::ResolverPar(){
 	for (int i = 1; i < this->NumMovimientos; ++i)
 		{
 			
-			int O=(this->origen.empty())?0:this->origen.top();
-			int A=(this->auxiliar.empty())?0:this->auxiliar.top();
-			int D=(this->destino.empty())?0:this->destino.top();
+			int O=(this->origen.empty())?INFINITY:this->origen.top();
+			int A=(this->auxiliar.empty())?INFINITY:this->auxiliar.top();
+			int D=(this->destino.empty())?INFINITY:this->destino.top();
 
 
 
@@ -46,12 +45,10 @@ void Hanoi::ResolverPar(){
 				{
 					this->origen.push(this->auxiliar.top());
 					this->auxiliar.pop();
-					//this->origenaux.push(origen.top());
 				}else
 				{
 					this->auxiliar.push(this->origen.top());
-					this->origen.pop();					
-					//this->aux.push(auxiliar.top());
+					this->origen.pop();				
 				}
 			}
 			if (i%3==2)
@@ -59,13 +56,11 @@ void Hanoi::ResolverPar(){
 				if ( O>D)
 				{
 					this->origen.push(this->destino.top());
-					this->destino.pop();					
-					//this->origenaux.push(origen.top());
+					this->destino.pop();			
 				}else
 				{
 					this->destino.push(this->origen.top());
 					this->origen.pop();
-					//this->destinoaux.push(destino.top());
 				}	
 			}
 			if (i%3==0)
@@ -74,12 +69,10 @@ void Hanoi::ResolverPar(){
 				{
 					this->auxiliar.push(this->destino.top());
 					this->destino.pop();
-					//this->aux.push(auxiliar.top());
 				}else
 				{
 					this->destino.push(this->auxiliar.top());
 					this->auxiliar.pop();
-					//this->destinoaux.push(destino.top());
 				}
 			}			
 			this->MostrarMov(this->origen,this->auxiliar,this->destino);
@@ -89,14 +82,10 @@ void Hanoi::ResolverPar(){
 N discos donde N es impar 
 no recibe ni regresa nada*/
 void Hanoi::ResolverImpar(){
-	for (int i = 1; i < this->NumMovimientos; ++i)
-		{
-
+	for (int i = 1; i < this->NumMovimientos; ++i){
 			int O=(this->origen.empty())?INFINITY:this->origen.top();
 			int A=(this->auxiliar.empty())?INFINITY:this->auxiliar.top();
 			int D=(this->destino.empty())?INFINITY:this->destino.top();
-
-			//std::cout<<O<<" "<<A<<" "<<D<<std::endl;
 			if (i%3==1)
 			{//movimento entre origen y destino
 				
@@ -105,12 +94,10 @@ void Hanoi::ResolverImpar(){
 
 					this->origen.push(this->destino.top());
 					this->destino.pop();
-					//this->origenaux.push(origen.top());
 				}else
 				{
 					this->destino.push(this->origen.top());
 					this->origen.pop();
-					//this->destinoaux.push(destino.top());
 				}	
 			}
 			if (i%3==2)
@@ -120,12 +107,10 @@ void Hanoi::ResolverImpar(){
 				{
 					this->origen.push(this->auxiliar.top());
 					this->auxiliar.pop();
-					//this->origenaux.push(origen.top());
 				}else
 				{
 					this->auxiliar.push(this->origen.top());
 					this->origen.pop();
-					//this->aux.push(auxiliar.top());
 				}
 			}
 			if (i%3==0)
@@ -134,12 +119,10 @@ void Hanoi::ResolverImpar(){
 				{
 					this->auxiliar.push(this->destino.top());
 					this->destino.pop();
-					//this->aux.push(auxiliar.top());
 				}else
 				{
 					this->destino.push(this->auxiliar.top());
-					this->auxiliar.pop();
-					//this->destinoaux.push(destino.top());
+					this->auxiliar.pop();					
 				}
 			}			
 		this->MostrarMov(this->origen,this->auxiliar,this->destino);
@@ -155,51 +138,8 @@ void Hanoi::LlenarTorre()
 		this->origen.push(i);
 	}
 }
-/**/
-void Hanoi::MostrarTorres()
-{   
-	std::stack<int> auxO;
-	std::stack<int> auxA;	
-	std::stack<int> auxD;
-	int mayor;
-	if(this->origen.size() > this->auxiliar.size() && this->origen.size() > this->destino.size())
-	{
-		mayor=origen.size();
-	}else if(this->auxiliar.size() > this->origen.size() && this->auxiliar.size() > this->destino.size())
-	{
-		mayor=auxiliar.size();
-	}else
-	{
-		mayor=destino.size();	
-	}
-	for(int i=mayor; i>0 ;--i)
-	{
-		if(i<=origen.size())
-		{
-			std::cout<<origen.top()<<" ";
-			auxO.push(origen.top());
-			origen.pop();	
-		}else{
-			std::cout<<"*"<<" ";
-		}
-		if(i<=auxiliar.size())
-		{
-			std::cout<<auxiliar.top()<<" ";
-			auxA.push(auxiliar.top());
-			auxiliar.pop();	
-		}else{
-			std::cout<<"*"<<" ";
-		}
-		if(i<=destino.size())
-		{
-			std::cout<<destino.top()<<std::endl;
-			auxD.push(destino.top());
-			destino.pop();	
-		}else{
-			std::cout<<"*"<<std::endl;
-		}	
-	}
-}
+/*muestra todos los movimientos para resolver las torres de hanoi 
+recibe las 3 torres*/
 void Hanoi::MostrarMov(std::stack<int> origenaux,std::stack<int> aux,std::stack<int> destinoaux)
 {	
 	std::cout<<"_______________________________________________"<<std::endl;	
@@ -226,7 +166,8 @@ void Hanoi::MostrarMov(std::stack<int> origenaux,std::stack<int> aux,std::stack<
 		Imprime(mayor,origenaux,aux,destinoaux);
 	}
 }
-
+/*Imprime los mmoviemntos para resolver las torres 
+recibe el numero de elementos de las torre mayor y las torres*/
 void Hanoi::Imprime(int mayor,std::stack<int> origenaux,std::stack<int> aux,std::stack<int> destinoaux){
 	std::stack<int> auxO;
 	std::stack<int> auxA;	
@@ -256,7 +197,6 @@ void Hanoi::Imprime(int mayor,std::stack<int> origenaux,std::stack<int> aux,std:
 			destinoaux.pop();	
 		}else{
 			std::cout<<"*"<<std::endl;
-		}	
-		//std::cout<<"mayor="<<mayor<<std::endl;
+		}		
 	}
 }

@@ -1,6 +1,6 @@
 /*Rodrigo Mayett Guzman 
 El programa muestra los pasos para resolver el juego "Torres de Handi"
-*/
+para N discos*/
 #include <iostream>
 #include <stack>
 #include <cmath>
@@ -22,7 +22,6 @@ public:
 	void ResolverPar();
 	void ResolverImpar();
 	void LlenarTorre();
-	void MostrarTorres();
 	void Imprime(int mayor,std::stack<int> origenaux,std::stack<int> aux,std::stack<int> destinoaux);
 	void MostrarMov(std::stack<int> origenaux,std::stack<int> aux,std::stack<int> destinoaux);
 };

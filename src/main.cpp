@@ -5,12 +5,7 @@ int main()
 	
 	std::cout<<"Torres de Hanoi"<<std::endl;
 	Hanoi H(3);
-	H.LlenarTorre();
-	//H.MostrarTorres();
-
-
+	H.LlenarTorre();	
 	H.Resolver();
-	std::cout<<"_______________________________________________"<<std::endl;
-	H.MostrarTorres();
-	return 0;
+		return 0;
 }
